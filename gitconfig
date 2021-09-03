@@ -1,0 +1,10 @@
+[user]
+	email = carlin.williamson1@gmail.com
+	name = Carlin Williamson
+[alias]
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	ds = diff --stat
+	stu = status -u
