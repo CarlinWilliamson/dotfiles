@@ -1,7 +1,5 @@
 #! /bin/sh
 
-WIDTH=${WIDTH:-200}
-HEIGHT=${HEIGHT:-200}
 DATEFMT=${DATEFMT:-"+%a %d.%m.%Y %H:%M:%S"}
 SHORTFMT=${SHORTFMT:-"+%H:%M:%S"}
 
@@ -25,16 +23,18 @@ done
 case "$BLOCK_BUTTON" in
   1|2|3) 
 
-	# the position of the upper left corner of the popup
-	posX=$(($BLOCK_X - $WIDTH / 2))
-	posY=$(($BLOCK_Y - $HEIGHT))
+	# yad takes the position of the upper left corner of the popup
+	# we need to find the top right of the current output
+	rect=$(i3-msg -t get_workspaces | jq '.[] | select(.focused == true).rect')
+	posX=$(echo "$rect" | jq '.x + .width - 300')
+	posY=$(echo "$rect" | jq '.y')
 
 	i3-msg -q "exec yad --calendar \
-        --width=$WIDTH --height=$HEIGHT \
 	    --undecorated --fixed \
 	    --close-on-unfocus --no-buttons \
 	    --posx=$posX --posy=$posY \
 	    > /dev/null"
 esac
-echo "$LABEL$(date "$DATEFMT")"
-echo "$LABEL$(date "$SHORTFMT")"
+echo "$(date -I'seconds')"
+echo "$(date "$SHORTFMT")"
+
