@@ -1,6 +1,6 @@
 #!/bin/sh
 
-files="gitconfig inputrc bashrc config/i3"
+files="gitconfig inputrc bashrc config/i3 config/htop"
 
 for file in $files; do
     target="$(pwd)/$file"
