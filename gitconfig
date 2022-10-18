@@ -2,9 +2,14 @@
 	email = carlin.williamson1@gmail.com
 	name = Carlin Williamson
 [alias]
+	co = checkout
 	st = status
 	ci = commit
+	ca = commit --amend
 	br = branch
-	co = checkout
+	stu = status -uno
 	ds = diff --stat
-	stu = status -u
+	d = diff
+	l = log --oneline
+[merge]
+	tool = meld
