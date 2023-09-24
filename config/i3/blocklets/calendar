@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 DATEFMT=${DATEFMT:-"+%a %d.%m.%Y %H:%M:%S"}
 SHORTFMT=${SHORTFMT:-"+%H:%M:%S"}
@@ -19,6 +19,7 @@ while getopts ":f:W:H:" opt; do
             ;;
     esac
 done
+
 
 case "$BLOCK_BUTTON" in
   1|2|3) 

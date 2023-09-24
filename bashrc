@@ -115,14 +115,12 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-source /home/carlinw/.runswift.bash
 
 
 export EDITOR='vi'
 alias hg='history | grep'
 alias gg='git grep'
 alias fng='find . | grep'
-alias cse='ssh -X z5122521@cse.unsw.edu.au'
 
 alias watch='watch -d -c'
 alias w.1='watch -n0.1 '
@@ -131,4 +129,6 @@ alias w.5='watch -n0.5 '
 alias w1='watch -n1 '
 alias w2='watch -n2 '
 alias w5='watch -n5 '
+
+alias g='git'
 
