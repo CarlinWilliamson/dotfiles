@@ -52,7 +52,7 @@ floating_modifier $mod
 #bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec "export PATH=~/bin:$PATH ;dmenu_run"
@@ -211,6 +211,7 @@ bindsym $mod+r mode "resize"
 bar {
         status_command SCRIPT_DIR=~/.config/i3/blocklets i3blocks -c ~/.config/i3/i3blocks.conf
         position top
+	tray_output primary
 }
 for_window [class="Yad"] floating enable
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
@@ -221,36 +222,48 @@ bindsym $mod+shift+Escape exec i3lock
 
 workspace_auto_back_and_forth yes
 
+# bindings
 bindsym $mod+u exec i3-sensible-terminal
 bindsym $mod+i exec thunar
 bindsym $mod+o exec gnome-calculator -m programming
 bindsym $mod+p exec google-chrome
 bindsym $mod+shift+p exec google-chrome --incognito
 
-bindsym $mod+F9 exec ~/Scripts/toggle_touchpad.sh
-
-bindsym --release shift+Print exec gnome-screenshot --area
-bindsym --release ctrl+shift+Print exec gnome-screenshot --area --clipboard
-bindsym --release Print exec gnome-screenshot
+bindsym $mod+F12 exec ~/Scripts/toggle_touchpad.sh
+bindsym shift+Print exec gnome-screenshot --area
+bindsym ctrl+shift+Print exec gnome-screenshot --area --clipboard
+bindsym Print exec gnome-screenshot
 
 #exec_always --no-startup-id compton --config ~/.config/compton.conf
 exec_always xset -dpms
 
+# unity style application dropdown search
 exec ~/.config/i3/hud-menu-master/appmenu-service.py
 bindsym $mod+x exec ~/.config/i3/hud-menu-master/hud-menu.py dmenu
 
+# certain windows whcih should be floating
 for_window [class="edu.wpi.first.pathweaver.PathWeaver" title="\.path"] floating enable
 for_window [class="Gnome-calculator"] floating enable
 for_window [class="Application"] floating enable
-
 floating_minimum_size 300 x 200
 
 focus_follows_mouse no
 
-exec_always spotify
+# spotify scratchpad
+exec_once spotify
 for_window [instance="spotify"] move scratchpad
 bindsym $mod+backslash scratchpad show
 
 default_border normal 4
 
 exec_always sh ~/.screenlayout/triple.sh
+
+
+# redshift
+exec_once redshift
+bindsym $mod+F9 exec pkill -USR1 redshift # toggles on/off
+
+for_window [class="zoom" title="^zoom$"] floating enable
+for_window [class="zoom" title="^Zoom Cloud Meetings$"] floating enable, resize set 400 400 move position center
+for_window [class="zoom" title="Settings"] floating enable, move position center
+for_window [class="zoom" title="Zoom - Licensed Account"] floating enable, move position center
