@@ -115,8 +115,11 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-source /home/carlinw/.runswift.bash
+#source /home/carlinw/.runswift.bash
 
+. /usr/share/bash-completion/completions/git
+alias g="git "
+__git_complete g _git_main
 
 export EDITOR='vi'
 alias hg='history | grep'
@@ -132,3 +135,4 @@ alias w1='watch -n1 '
 alias w2='watch -n2 '
 alias w5='watch -n5 '
 
+. "$HOME/.cargo/env"
