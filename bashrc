@@ -16,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -90,7 +90,7 @@ fi
 # some more ls aliases
 alias ll='ls -alFh'
 alias la='ls -A'
-alias l='ls -CF'
+#alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -115,26 +115,24 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-#source /home/carlinw/.runswift.bash
 
-. /usr/share/bash-completion/completions/git
-alias g="git "
-__git_complete g _git_main
+function timer_start {
+  timer=${timer:-$SECONDS}
+}
 
-export EDITOR='vi'
-alias hg='history | grep'
-alias gg='git grep'
-alias fng='find . | grep'
-#alias cse='ssh -X z5122521@cse.unsw.edu.au'
+function timer_stop {
+  timer_show=$(($SECONDS - $timer))
+  unset timer
+}
 
-alias watch='watch -d -c'
-alias w.1='watch -n0.1 '
-alias w.2='watch -n0.2 '
-alias w.5='watch -n0.5 '
-alias w1='watch -n1 '
-alias w2='watch -n2 '
-alias w5='watch -n5 '
+trap 'timer_start' DEBUG
 
-alias difs='diff -y -W $(tputs cols)'
+if [ "$PROMPT_COMMAND" == "" ]; then
+  PROMPT_COMMAND="timer_stop"
+else
+  PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
+fi
+
+PS1="\$timer_show $PS1"
 
 . "$HOME/.cargo/env"
