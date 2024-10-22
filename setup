@@ -1,0 +1,68 @@
+# Very informal cookbook for programs I rely on
+
+
+sudo apt install curl i3-wm i3blocks jq net-tools pdftk-java compton guvcview git lm-sensors pluma thunar kdenlive gimp vim vlc
+sudo apt install delta htop btop ncdu
+sudo apt install fzf # might be an old version
+
+# https://github.com/junegunn/fzf
+# https://github.com/axiros/terminal_markdown_viewer/tree/master
+
+# https://www.google.com.au/chrome
+sudo apt install ./Downloads/google-chrome-stable_current_amd64.deb
+
+cd ~/.config/i3
+wget -q https://github.com/sharpTrick/set-i3-workspace/archive/master.zip
+unzip master.zip
+rm master.zip
+chmod 775 set-i3-workspace-master/set-i3-workspace.sh
+cd ~
+
+
+#sudo snap install rambox # have stopped using this
+
+# laptop specific
+#sudo apt install xbacklight
+#sudo apt install xautolock
+
+
+# https://zoom.us/download
+sudo apt install ./Downloads/zoom_amd64.deb
+
+curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - 
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt update && sudo apt install spotify-client
+
+
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+sudo apt install code
+
+
+# for unity style dropdown menu searching
+sudo apt install python3 python-dbus dmenu unity-gtk2-module unity-gtk3-module wget
+cd ~/.config/i3
+wget -q https://github.com/jamcnaughton/hud-menu/archive/master.zip
+unzip master.zip
+rm master.zip
+sed -i "s/, '-l', '15'//" hud-menu-master/hud-menu.py
+chmod 775 hud-menu-master/*.py
+cd ~
+
+# append the following into ~/.profile
+cat << EOF
+export APPMENU_DISPLAY_BOTH=1
+if [ -n "$GTK_MODULES" ]
+then
+  GTK_MODULES="$GTK_MODULES:unity-gtk-module"
+else
+  GTK_MODULES="unity-gtk-module"
+fi
+if [ -z "$UBUNTU_MENUPROXY" ]
+then
+  UBUNTU_MENUPROXY=1
+fi
+export GTK_MODULES
+export UBUNTU_MENUPROXY
+EOF
+
