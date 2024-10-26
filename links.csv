@@ -7,4 +7,5 @@ vimrc,.vimrc
 config/i3,.config/i3
 config/htop,.config/htop
 tmux.conf,.tmux.conf
+bin,bin
 
