@@ -2,7 +2,7 @@
 
 
 sudo apt install curl i3-wm i3blocks jq net-tools pdftk-java compton guvcview git lm-sensors pluma thunar kdenlive gimp vim vlc
-sudo apt install delta htop btop ncdu
+sudo apt install delta htop btop ncdu yad
 sudo apt install fzf # might be an old version
 
 # https://github.com/junegunn/fzf
