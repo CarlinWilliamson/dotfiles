@@ -1,6 +1,6 @@
 #!/bin/sh
 
-files="gitconfig inputrc bashrc bash_aliases vimrc config/i3 config/htop"
+files="gitconfig inputrc bashrc bash_aliases vimrc config/i3 config/htop tmux.conf"
 
 for file in $files; do
     target="$(pwd)/$file"
